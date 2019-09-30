@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">  
+  <head>
+    <meta charset="utf-8">
+    <title>Event Listners</title>
+      <style type="text/css">
+        body{
+          background :url(pop.jpg);
+          background-repeat: no-repeat;
+          background-size: 100%;
+        }
+        .key{
+          background-color: black;
+          border: 1px solid white;
+          width : 40px;
+          height: 40px;
+          padding-top: 20px;
+          padding-left: 30px;
+          font-size : 20px;       
+          color: white;
+          border-width: 4px;
+          transition: all 0.07;
+          margin:1px;
+        }
+        .playing{
+          transform: scale(1.1);
+          border-color:cyan;
+          box-shadow: 0 0 10px #ffc600; 
+        }
+        div.inline { float:left; }
+        div.mustCenter {
+          
+          position: absolute;
+          top:50%;
+          left: 40%;
+        }
+
+      </style>
+
+  </head>
+  <body>
+    <div class="mustCenter">
+        <div data-key='65' class="key inline">
+          <div>
+            <kbd>A</kbd>
+          </div>
+        </div>
+        <div data-key='66' class="key inline">
+          <div>
+            <kbd>B</kbd>
+          </div>
+        </div>
+        <div data-key='67' class="key inline">
+          <div>
+            <kbd>C</kbd>
+          </div>
+        </div>
+        <div data-key='68' class="key inline">
+          <div>
+            <kbd>D</kbd>
+          </div>
+        </div>
+        <div data-key='69' class="key inline">
+          <div>
+            <kbd>E</kbd>
+          </div>
+        </div>
+    </div>
+    <audio data-key="65" src="honk.wav"></audio>
+    <audio data-key="66" src="peel.wav"></audio>
+    <audio data-key="67" src="Dog.wav"></audio>
+    <audio data-key="68" src="robot.wav"></audio>
+    <audio data-key="69" src="blop.wav"></audio>
+    <script type="text/javascript">
+      window.addEventListener("keydown",function(e){
+            const audio=document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"`);
+            if(!audio) return;
+            audio.currentTime=0;
+            audio.play();
+            key.classList.add('playing');
+            setTimeout(function(){
+              key.classList.remove('playing');
+            }, 500);
+
+          
+      });
+
+      
+    </script>
+  </body>
+</html>
